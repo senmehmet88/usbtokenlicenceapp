@@ -9,11 +9,11 @@ import iaik.pkcs.pkcs11.Slot;
 import iaik.pkcs.pkcs11.Token;
 import iaik.pkcs.pkcs11.objects.AESSecretKey;
 
-public class YtuDecryptAndRun {
+public class AppDecryptAndRun {
 
 	public static void main(String[] args) throws Exception {
 
-		String libname = "etpkcs11.dll";
+		String libname = args[0];
 
 		Module pkcs11Module = Module.getInstance(libname);
 		pkcs11Module.initialize(null);
@@ -25,7 +25,7 @@ public class YtuDecryptAndRun {
 		Session session = token.openSession(Token.SessionType.SERIAL_SESSION, Token.SessionReadWriteBehavior.RO_SESSION,
 				null, null);
 
-		session.login(Session.UserType.USER, args[0].toCharArray());
+		session.login(Session.UserType.USER, args[1].toCharArray());
 
 		AESSecretKey encryptionKey = FindSignatureKey.getSecretKey(session);
 		System.out.println(encryptionKey);

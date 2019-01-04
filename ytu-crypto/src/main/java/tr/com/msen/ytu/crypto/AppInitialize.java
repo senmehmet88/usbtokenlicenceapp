@@ -6,12 +6,13 @@ import iaik.pkcs.pkcs11.Module;
 import iaik.pkcs.pkcs11.Session;
 import iaik.pkcs.pkcs11.TokenException;
 
-public class YtuProgram {
+public class AppInitialize {
 
 	public static void main(String[] args) throws IOException, TokenException {
 
-		String libname = "etpkcs11.dll";
-		String tokenLabel = "Test123";
+		String libname = args[0];
+		String tokenLabel = args[1];
+		
 		String appFile = "test-ytu.bin";
 		
 		Module pkcs11Module = Module.getInstance(libname);
