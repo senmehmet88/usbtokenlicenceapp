@@ -2,6 +2,8 @@ package tr.com.msen.ytu.crypto;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 
 import iaik.pkcs.pkcs11.Module;
 import iaik.pkcs.pkcs11.Session;
@@ -31,7 +33,10 @@ public class AppDecryptAndRun {
 		System.out.println(encryptionKey);
 
 		byte[] encryptedData = Files.readAllBytes(Paths.get("EncryptedApp"));
+		Instant start = Instant.now();
 		byte[] decrypt = Decrypt.decrypt(session, encryptedData, encryptionKey);
+		Instant end = Instant.now();
+		System.out.println(Duration.between(start, end)); 
 
 		String path = TemporaryFile.createTempFile(decrypt);
 
